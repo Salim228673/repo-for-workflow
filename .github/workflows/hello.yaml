@@ -2,12 +2,12 @@ name: first-workflow
 on: push
 jobs:
   first-job:
-  runs-on: ubuntu
-  steps:
-    - name: PrintGreeting
-      run: echo "HI-BYE"
+    runs-on: ubuntu
+    steps:
+      - name: PrintGreeting
+        run: echo "HI-BYE"
   second-job:
-  runs-on: ubuntu
-  steps: 
-    - name: got it
-      run: echo "GOT IT"
+    runs-on: ubuntu
+    steps: 
+      - name: got it
+        run: echo "GOT IT"
