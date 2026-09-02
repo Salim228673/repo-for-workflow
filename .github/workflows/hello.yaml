@@ -1,32 +1,8 @@
-name: Deploy Project
-on: [push, workflow_dispatch]
+name: Context Testing
+on: push
 jobs:
-  test:
+  dump_context_to_log:
     runs-on: ubuntu-latest
-    steps:
-      - name: Get code
-        uses: actions/checkout@v4
-      - name: Install NodeJS
-        uses: actions/setup-node@v4
-        with:
-          node-version: 18
-      - name: Install Dependencies
-        run: npm install
-      - name: tests
-        run: npm test
-  Deploy:
-    needs: test
-    runs-on: ubuntu-latest
-    steps:
-      - name: Get code
-        uses: actions/checkout@v4
-      - name: Install NodeJS
-        uses: actions/setup-node@v4
-        with:
-          node-version: 18
-      - name: Install Dependencies
-        run: npm install
-      - name: Build Project
-        run: npm run build
-      - name: Deploy
-        run: echo "Deploying..."
+    steps: 
+      - name: Github_Context
+        run: echo '${{ toJSON(github) }}'
