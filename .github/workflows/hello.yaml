@@ -1,13 +1,32 @@
-name: first-workflow
-on: push
+name: Deploy Project
+on: [push, workflow_dispatch]
 jobs:
-  first-job:
+  test:
     runs-on: ubuntu-latest
     steps:
-      - name: PrintGreeting
-        run: echo "HI-BYE"
-  second-job:
+      - name: Get code
+        uses: action/checkout@v3
+      - name: Install NodeJS
+        uses: action/setup-node@v3
+        with:
+          node-version: 18
+      - name: Install Dependencies
+        run: npm install
+      - name: tests
+        run: npm test
+  Deploy:
+    needs: test
     runs-on: ubuntu-latest
-    steps: 
-      - name: got it
-        run: echo "GOT IT"
+    steps:
+      - name: Get code
+        uses: action/checkout@v3
+      - name: Install NodeJS
+        uses: action/setup-node@v3
+        with:
+          node-version: 18
+      - name: Install Dependencies
+        run: npm install
+      - name: Build Project
+        run: npm run build
+      - name: Deploy
+        run: echo "Deploying..."
